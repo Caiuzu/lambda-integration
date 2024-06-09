@@ -1,0 +1,24 @@
+{
+  "name": "lambda-integration",
+  "version": "1.0.0",
+  "description": "Simple Docker Localstack AWS Lambda Setup",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Caiuzu/lambda-integration.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Caiuzu/lambda-integration/issues"
+  },
+  "homepage": "https://github.com/Caiuzu/lambda-integration#readme",
+  "dependencies": {
+    "@aws-sdk/client-lambda": "^3.588.0",
+    "aws-sdk": "^2.1632.0"
+  }
+}
