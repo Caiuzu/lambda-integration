@@ -1,4 +1,20 @@
-# lambda-integration
+# Lambda Integration
+
+<!--Banner e logo-->
+
+<div align="center">
+<img src="https://awsmp-logos.s3.amazonaws.com/d23d1bcc-cfe5-4301-893b-8f30025074e4/f5a016996213129265ed0eb248157749.png">
+</div>
+
+<!-- Badges -->
+<p align="center">
+   <a href="https://www.linkedin.com/in/caiuzu/">
+      <img alt="Caio Souza" src="https://img.shields.io/badge/-Caio Souza-755ceb?style=flat&logo=Linkedin&logoColor=white" />
+   </a>
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/caiuzu/lambda-integration?color=6c87f7"/>
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/caiuzu/lambda-integration?color=6a76f3"/>
+</p>
+
 
 ---
 
@@ -340,3 +356,5 @@ Verifique a saída no terminal para ver o resultado da invocação da função L
 - [AWS SDK for JavaScript - Lambda Invoke Example](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/lambda/actions/invoke.js)
 
 ---
+
+<h4 align=center>Desenvolvido por Caio Souza <a href="https://www.linkedin.com/in/caiuzu/"> <strong>Entre em contato</strong> ;D</a></h4>
