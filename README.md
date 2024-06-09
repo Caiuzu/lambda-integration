@@ -2,17 +2,30 @@
 
 ---
 
-### Passo a Passo Completo para Configurar Lambdas no LocalStack com Docker
+## Índice
+
+1. [Instalar o AWS CLI e LocalStack CLI](#1-instalar-o-aws-cli-e-localstack-cli)
+2. [Configurar o Docker Compose](#2-configurar-o-docker-compose)
+3. [Estrutura de Diretórios](#3-estrutura-de-diretórios)
+4. [Criar o Código da Lambda](#4-criar-o-código-da-lambda)
+5. [Criar o Script de Configuração do LocalStack](#5-criar-o-script-de-configuração-do-localstack)
+6. [Iniciar o Docker Compose e Configurar o LocalStack](#6-iniciar-o-docker-compose-e-configurar-o-localstack)
+7. [Comandos Úteis para Interagir com a Lambda](#7-comandos-úteis-para-interagir-com-a-lambda)
+8. [Código para Invocar a Lambda com Node.js](#8-código-para-invocar-a-lambda-com-nodejs)
+9. [Instalar Dependências](#9-instalar-dependências)
+10. [Executar o Código](#10-executar-o-código)
+11. [Verificar a Resposta](#11-verificar-a-resposta)
+12. [Referências](#12-referências)
 
 ---
 
-#### 1. Instalar o AWS CLI e LocalStack CLI
+## 1. Instalar o AWS CLI e LocalStack CLI
 
-**AWS CLI:**
+### AWS CLI:
 
 Siga as instruções para instalar o AWS CLI: [AWS CLI Installation](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 
-**LocalStack CLI:**
+### LocalStack CLI:
 
 ```sh
 pip install localstack
@@ -20,7 +33,7 @@ pip install localstack
 
 ---
 
-#### 2. Configurar o Docker Compose
+## 2. Configurar o Docker Compose
 
 Crie um arquivo `docker-compose.yml` na raiz do seu projeto:
 
@@ -37,15 +50,16 @@ services:
     environment:
       - DEBUG=${DEBUG:-0}
       - SERVICES=lambda,logs
+      - LAMBDA_REMOTE_DOCKER=false
+      - REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
-
 ```
 
 ---
 
-#### 3. Estrutura de Diretórios
+## 3. Estrutura de Diretórios
 
 Certifique-se de ter a seguinte estrutura de diretórios e arquivos:
 
@@ -57,12 +71,11 @@ seu-projeto
     └── lambdas
         └── example-lambda
             └── index.js
-
 ```
 
 ---
 
-#### 4. Criar o Código da Lambda
+## 4. Criar o Código da Lambda
 
 **Arquivo: `localstack/lambdas/example-lambda/index.js`**
 
@@ -80,7 +93,7 @@ exports.handler = async (event) => {
 
 ---
 
-#### 5. Criar o Script de Configuração do LocalStack
+## 5. Criar o Script de Configuração do LocalStack
 
 **Arquivo: `localstack/setup-localstack.sh`**
 
@@ -149,7 +162,6 @@ for LAMBDA_INFO in "${LAMBDAS[@]}"; do
     echo "Directory $LAMBDA_CODE_DIR does not exist. Skipping..."
   fi
 done
-
 ```
 
 Dê permissão de execução ao script:
@@ -160,7 +172,7 @@ chmod +x localstack/setup-localstack.sh
 
 ---
 
-#### 6. Iniciar o Docker Compose e Configurar o LocalStack
+## 6. Iniciar o Docker Compose e Configurar o LocalStack
 
 Inicie os serviços:
 
@@ -168,7 +180,7 @@ Inicie os serviços:
 docker-compose up -d
 ```
 
-Execute o script de configuração (apartir da raiz do projeto):
+Execute o script de configuração (a partir da raiz do projeto):
 
 ```sh
 ./localstack/setup-localstack.sh
@@ -176,7 +188,7 @@ Execute o script de configuração (apartir da raiz do projeto):
 
 ---
 
-#### 7. Comandos Úteis para Interagir com a Lambda
+## 7. Comandos Úteis para Interagir com a Lambda
 
 **Consultar Lambda:**
 
@@ -253,7 +265,7 @@ Substitua `<LOG_STREAM_NAME>` pelo nome do stream de logs retornado pelo comando
 
 ---
 
-### 8. Código para Invocar a Lambda com Node.js
+## 8. Código para Invocar a Lambda com Node.js
 
 **Arquivo: `index.js`**
 
@@ -282,7 +294,9 @@ const invoke = async (funcName, payload) => {
 
 // Nome da função Lambda e payload
 const funcName = 'example-lambda';
-const payload = { body: JSON.stringify({ num1: 3, num2: 4 }) };
+const payload = { body
+
+: JSON.stringify({ num1: 3, num2: 4 }) };
 
 // Invocar a função Lambda
 invoke(funcName, payload).catch((error) => {
@@ -290,7 +304,9 @@ invoke(funcName, payload).catch((error) => {
 });
 ```
 
-### 9. Instalar Dependências
+---
+
+## 9. Instalar Dependências
 
 Certifique-se de que as dependências necessárias estão instaladas:
 
@@ -298,7 +314,9 @@ Certifique-se de que as dependências necessárias estão instaladas:
 npm install @aws-sdk/client-lambda
 ```
 
-### 10. Executar o Código
+---
+
+## 10. Executar o Código
 
 Execute o script para invocar a Lambda:
 
@@ -306,13 +324,15 @@ Execute o script para invocar a Lambda:
 node index.js
 ```
 
-### 11. Verificar a Resposta
+---
+
+## 11. Verificar a Resposta
 
 Verifique a saída no terminal para ver o resultado da invocação da função Lambda.
 
 ---
 
-### Referências
+## 12. Referências
 
 - [AWS CLI Installation](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 - [LocalStack Installation](https://docs.localstack.cloud/getting-started/installation/#docker-compose)
