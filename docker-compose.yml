@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME:-localstack-container}"
+    image: localstack/localstack:latest
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    environment:
+      - DEBUG=${DEBUG:-0}
+      - SERVICES=lambda,logs
+      - LAMBDA_EXECUTOR=docker
+      - PROVIDER_OVERRIDE_LAMBDA=asf
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
