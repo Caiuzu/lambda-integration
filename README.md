@@ -43,9 +43,11 @@ Siga as instruções para instalar o AWS CLI: [AWS CLI Installation](https://doc
 
 ### LocalStack CLI:
 
-```sh
-pip install localstack
-```
+Siga as instruções para instalar o LocalStack CLI: https://docs.localstack.cloud/getting-started/installation/
+
+### LocalStack Desktop:
+
+Siga as instruções para instalar o LocalStack Desktop: https://docs.localstack.cloud/user-guide/tools/localstack-desktop/
 
 ---
 
